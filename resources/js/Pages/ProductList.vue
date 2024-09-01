@@ -36,9 +36,10 @@
           <strong>{{ product.title }}</strong>
           <p>{{ product.description }}</p>
           <p>${{ product.price }}</p>
+          <!-- <p> {{  $attrs.auth.user.role}}  </p> -->
           <img :src="product.image" alt="Product Image" width="200">
-          <a href="#" @click.prevent="openModal(product)">Edit</a>
-          <button @click="deleteProduct(product.id)">Delete</button>
+          <a  v-if="$attrs.auth.user.role == 'administrador'"  href="#" @click.prevent="openModal(product)">Edit</a>
+          <button v-if="$attrs.auth.user.role == 'administrador'" @click="deleteProduct(product.id)">Delete</button>
           <div>
             <button @click="pay">Pay Now</button>
           </div>
@@ -47,6 +48,8 @@
       </ul>
     </div>
   </template>
+
+  
   
   <script>
   import Modal from '@/Components/Modal.vue';
